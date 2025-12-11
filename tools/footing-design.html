@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footing Design | CivilDoctor Tools</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #0078ff;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #005fcc;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8ffe8;
+            border-left: 5px solid #00aa00;
+        }
+        a.home-link {
+            display: block;
+            margin-top: 25px;
+            text-align: center;
+            color: #0078ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Footing Size Calculator</h2>
+
+    <label>Column Load (kN)</label>
+    <input type="number" id="load" placeholder="Enter load e.g. 450">
+
+    <label>Safe Bearing Capacity SBC (kN/m²)</label>
+    <input type="number" id="sbc" placeholder="Enter SBC e.g. 200">
+
+    <button onclick="calculate()">Calculate Footing Size</button>
+
+    <div id="output" class="result" style="display:none;"></div>
+
+    <a class="home-link" href="index.html">← Back to Tools</a>
+</div>
+
+<script>
+function calculate() {
+    let load = parseFloat(document.getElementById('load').value);
+    let sbc = parseFloat(document.getElementById('sbc').value);
+
+    if (!load || !sbc) {
+        alert("Please enter both values.");
+        return;
+    }
+
+    let area = load / sbc;
+    let side = Math.sqrt(area).toFixed(2);
+
+    document.getElementById('output').style.display = "block";
+    document.getElementById('output').innerHTML = 
+        "<b>Required Footing Area:</b> " + area.toFixed(3) + " m²<br>" +
+        "<b>Footing Size:</b> " + side + " m × " + side + " m";
+}
+</script>
+
+</body>
+</html>
